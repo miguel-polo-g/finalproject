@@ -1,0 +1,105 @@
+
+  <div class="row">
+    <div class="col-sm-5 text-right">
+      <img
+      style="width: 50px; "
+      src="https://firebasestorage.googleapis.com/v0/b/covidapp-a06f0.appspot.com/o/COVID19-Project%20LOGO.png?alt=media&token=eab751b1-c798-48a0-8d9a-9cf785c80be6"
+      alt="Virus image"
+      />
+    </div>
+    <div class="col-sm-7 ">
+      <h1>COVID-19</h1> 
+    </div>   
+  </div>
+  
+  <div style="margin: 1%">
+    <app-news></app-news>
+  </div>
+
+  <div class="text-center content-secondary">
+    <h4>Live Updates and Statistics</h4>
+  </div>
+  <div class ="text-center" style="background-color:rgb(83, 83, 114); padding:0.5%; padding:0.5%; margin: 1%">
+    <h5 style="color: white;"><a class="link" style="color: rgb(85, 153, 209)" (click)="returnToMainPage()">Worldwide</a> > {{summary.Country}}</h5>
+  </div>
+
+  <div style="background-color:lavender; padding:0.5%;">
+    <h5>Coronavirus Summary in {{summary.Country}}</h5>
+  </div>
+  <div class="my-3" >
+    <table *ngIf="summary" class="table table-bordered">
+      <tbody class="table-warning">
+        <tr>
+          <td>Total cases</td>
+          <td class="text-right">{{summary.TotalConfirmed | number}}</td>
+        </tr>
+        <tr>
+          <td>New cases</td>
+          <td class="text-right">{{summary.NewConfirmed | number}}</td>
+        </tr>
+        <tr>
+          <td>Active cases</td>
+          <td class="text-right">{{summary.TotalConfirmed - summary.TotalDeaths - summary.TotalRecovered | number}}</td>
+        </tr>
+      </tbody>
+      <tbody class="table-info">
+        <tr>
+          <td>Total recovered</td>
+          <td class="text-right">{{summary.TotalRecovered | number}}</td>
+        </tr>
+        <tr>
+          <td>New recovered</td>
+          <td class="text-right">{{summary.NewRecovered | number}}</td>
+        </tr>
+        <tr>
+          <td>Recovery rate</td>
+          <td class="text-right">{{summary.TotalRecovered/summary.TotalConfirmed | percent:'1.0-2'}}</td>
+        </tr>
+      </tbody>
+      <tbody class="table-danger">
+        <tr>
+          <td>Total deaths</td>
+          <td class="text-right">{{summary.TotalDeaths | number}}</td>
+        </tr>
+        <tr>
+          <td>New deaths</td>
+          <td class="text-right">{{summary.NewDeaths | number}}</td>
+        </tr>
+        <tr>
+          <td>Mortality rate</td>
+          <td class="text-right">{{summary.TotalDeaths/summary.TotalConfirmed | percent:'1.0-2'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Coronavirus Cases Distribution in {{summary.Country}}</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-pie-chart></app-pie-chart>
+    </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Daily Coronavirus Cases in {{summary.Country}}</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-bar-chart></app-bar-chart>
+    </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Total Coronavirus Cases in {{summary.Country}}</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-line-chart></app-line-chart>
+    </div>
+
+    <footer class="text-center" style="background-color:lavender; ;padding:0.5%;">
+        <p>Data Sources: 
+        <a href="https://covid19api.com/">COVID-19 API/Johns Hopkins CSSE</a>
+         and 
+        <a href="https://corona.lmao.ninja/">disease.sh - Open Disease Data</a></p>
+    </footer>
+
+    
+  

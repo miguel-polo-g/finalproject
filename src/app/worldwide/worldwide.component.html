@@ -1,0 +1,164 @@
+
+  <div class="row">
+    <div class="col-sm-5 text-right">
+      <img
+      style="width: 50px; "
+      src="https://firebasestorage.googleapis.com/v0/b/covidapp-a06f0.appspot.com/o/COVID19-Project%20LOGO.png?alt=media&token=eab751b1-c798-48a0-8d9a-9cf785c80be6"
+      alt="Virus image"
+      />
+    </div>
+    <div class="col-sm-7 ">
+      <h1>COVID-19</h1> 
+    </div>   
+  </div>
+  
+  <div style="margin: 1%">
+    <app-news></app-news>
+  </div>
+
+  <div class="text-center content-secondary">
+    <h4>Live Updates and Statistics</h4>
+  </div>
+
+  <div style="background-color:lavender; padding:0.5%;">
+    <h5>Coronavirus Summary Worldwide</h5>
+  </div>
+  <div class="my-3" >
+    <table *ngIf="summary" class="table table-bordered">
+      <tbody class="table-warning">
+        <tr>
+          <td>Total cases</td>
+          <td class="text-right">{{summary.TotalConfirmed | number}}</td>
+        </tr>
+        <tr>
+          <td>New cases</td>
+          <td class="text-right">{{summary.NewConfirmed | number}}</td>
+        </tr>
+        <tr>
+          <td>Active cases</td>
+          <td class="text-right">{{summary.TotalConfirmed - summary.TotalDeaths - summary.TotalRecovered | number}}</td>
+        </tr>
+      </tbody>
+      <tbody class="table-info">
+        <tr>
+          <td>Total recovered</td>
+          <td class="text-right">{{summary.TotalRecovered | number}}</td>
+        </tr>
+        <tr>
+          <td>New recovered</td>
+          <td class="text-right">{{summary.NewRecovered | number}}</td>
+        </tr>
+        <tr>
+          <td>Recovery rate</td>
+          <td class="text-right">{{summary.TotalRecovered/summary.TotalConfirmed | percent:'1.0-2'}}</td>
+        </tr>
+      </tbody>
+      <tbody class="table-danger">
+        <tr>
+          <td>Total deaths</td>
+          <td class="text-right">{{summary.TotalDeaths | number}}</td>
+        </tr>
+        <tr>
+          <td>New deaths</td>
+          <td class="text-right">{{summary.NewDeaths | number}}</td>
+        </tr>
+        <tr>
+          <td>Mortality rate</td>
+          <td class="text-right">{{summary.TotalDeaths/summary.TotalConfirmed | percent:'1.0-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Coronavirus Cases Distribution Worldwide</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-pie-chart></app-pie-chart>
+    </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Daily Coronavirus Cases Worldwide</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-bar-chart></app-bar-chart>
+    </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Total Coronavirus Cases Worldwide</h5>
+    </div>
+    <div  style="margin: 1%">
+      <app-line-chart></app-line-chart>
+    </div>
+
+    <div  style="background-color:lavender; padding:0.5%;">
+      <h5>Coronavirus Cases by Country</h5>
+    </div>
+      <div class="my-3 table-responsive" style="height: 500px; overflow-y: auto;" >
+        <table class="table table-bordered table-hover table-condensed">
+          <thead class="text-center">
+            <tr>
+              <th class="table-striped">Country 
+                <div >
+                <fa-icon  [icon]="faAngleUp"  (click)="orderBy('Country',true)"></fa-icon>
+                <fa-icon  [icon]="faAngleDown" (click)="orderBy('Country',false)"></fa-icon>
+                </div>
+              </th>
+              <th class="table-warning">New Cases
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('NewConfirmed',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('NewConfirmed',false)"></fa-icon>
+                  </div>
+              </th>
+              <th class="table-warning">Total Cases
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('TotalConfirmed',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('TotalConfirmed',false)"></fa-icon>
+                  </div>
+              </th>
+              <th class="table-info">New Recoveries
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('NewRecovered',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('NewRecovered',false)"></fa-icon>
+                  </div>
+              </th>
+              <th class="table-info">Total Recoveries
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('TotalRecovered',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('TotalRecovered',false)"></fa-icon>
+                </div></th>
+              <th class="table-danger">New Deaths
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('NewDeaths',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('NewDeaths',false)"></fa-icon>
+                </div></th>
+              <th class="table-danger">Total Deaths
+                <div>
+                  <fa-icon [icon]="faAngleUp" (click)="orderBy('TotalDeaths',true)" ></fa-icon>
+                  <fa-icon [icon]="faAngleDown" (click)="orderBy('TotalDeaths',false)"></fa-icon>
+                </div></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let country of countries">
+              <td class="table-striped" (click)="covidService.goToCountryPage(country)">{{ country.Country }}</td>
+              <td class="table-warning">{{ country.NewConfirmed | number}}</td>
+              <td class="table-warning">{{ country.TotalConfirmed | number}}</td>
+              <td class="table-info">{{ country.NewRecovered | number}}</td>
+              <td class="table-info">{{ country.TotalRecovered | number}}</td>
+              <td class="table-danger">{{ country.NewDeaths | number}}</td>
+              <td class="table-danger">{{ country.TotalDeaths | number}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    <footer class="text-center" style="background-color:lavender; ;padding:0.5%;">
+        <p>Data Sources: 
+        <a href="https://covid19api.com/">COVID-19 API/Johns Hopkins CSSE</a>
+         and 
+        <a href="https://corona.lmao.ninja/">disease.sh - Open Disease Data</a></p>
+    </footer>
+
+    
+  

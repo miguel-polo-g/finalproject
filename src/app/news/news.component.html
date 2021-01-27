@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="col-sm-6">
+      <h3><span class="badge badge-pill badge-dark">News</span></h3>
+    </div>
+    <div class="col-sm-6 text-right">
+      <button class="btn btn-info" (click)="covidService.signInWithGoogle()">
+        Sign In
+      </button>
+    </div>
+</div>
+<div class="card-deck" *ngIf="news && news.length > 0">
+    <div class="card" *ngFor="let n of news">
+        <div class="card-body">
+        <h5 class="card-title">{{n.country}}</h5>
+        <p class="card-text">{{n.description}}</p>
+        <footer class="small font-italic">Created by: {{n.user.displayname}} on {{n.date.toDate() | date}}.</footer>
+        </div>
+    </div>
+</div>
+
+  
