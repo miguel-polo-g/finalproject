@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The webapp is currently deployed in firebase, and can be visited [here](https://covidapp-a06f0.web.app/).
 
+:warning: Please note that due to the shutdown of the API providing covid-19 data, the webapp currently looks incomplete and lacks information that was once displayed correctly. I left it intentionally "broken" as a reminder that the pandemic is over. Yaaaay!
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
